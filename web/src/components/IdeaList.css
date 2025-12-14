@@ -1,0 +1,103 @@
+.idea-list {
+  display: grid;
+  gap: 16px;
+}
+
+.no-ideas {
+  text-align: center;
+  color: #999;
+  padding: 40px;
+  font-size: 1.2rem;
+}
+
+.idea-item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.idea-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.idea-content {
+  padding: 16px;
+  cursor: pointer;
+}
+
+.idea-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.idea-category {
+  background-color: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.idea-level {
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.idea-title {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.idea-preview {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.idea-date {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.idea-actions {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.idea-actions button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.edit-btn {
+  color: #4a90e2;
+  border-right: 1px solid #f0f0f0;
+}
+
+.edit-btn:hover {
+  background-color: #f0f8ff;
+}
+
+.delete-btn {
+  color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background-color: #fff5f5;
+}

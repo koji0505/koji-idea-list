@@ -1,0 +1,12 @@
+{
+  "name": "koji-idea-list-database",
+  "version": "1.0.0",
+  "description": "Database initialization for Koji's Idea List",
+  "main": "init.js",
+  "scripts": {
+    "init": "node init.js"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.6"
+  }
+}
