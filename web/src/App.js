@@ -16,41 +16,32 @@ function App() {
   const [editingIdea, setEditingIdea] = useState(null);
 
   const fetchIdeas = useCallback(async () => {
-    try {
-      let query = supabase.from('ideas').select('*').order('created_at', { ascending: false });
-
-      if (selectedCategory !== 'すべて') {
-        query = query.eq('category', selectedCategory);
-      }
-      if (selectedLevel !== 'すべて') {
-        query = query.eq('level', selectedLevel);
-      }
-
-      const { data, error } = await query;
-
-      if (error) throw error;
-      setIdeas(data || []);
-    } catch (error) {
-      console.error('アイデア取得エラー:', error);
-    }
+    let query = supabase.from('ideas').select('*').order('created_at', { ascending: false });
+    if (selectedCategory !== 'すべて') query = query.eq('category', selectedCategory);
+    if (selectedLevel !== 'すべて') query = query.eq('level', selectedLevel);
+    const { data, error } = await query;
+    if (error) throw error;
+    setIdeas(data || []);
   }, [selectedCategory, selectedLevel]);
 
   const fetchCategories = useCallback(async () => {
-    try {
-      const { data, error } = await supabase.from('ideas').select('category');
-
-      if (error) throw error;
-      const categoryList = [...new Set(data?.map(item => item.category) || [])];
-      setCategories(['すべて', ...categoryList.sort()]);
-    } catch (error) {
-      console.error('カテゴリー取得エラー:', error);
-    }
+    const { data, error } = await supabase.from('ideas').select('category');
+    if (error) throw error;
+    const categoryList = [...new Set(data?.map(item => item.category) || [])];
+    setCategories(['すべて', ...categoryList.sort()]);
   }, []);
 
-  useEffect(() => {
-    fetchIdeas();
-    fetchCategories();
+  const refreshAll = useCallback(async () => {
+    try {
+      await Promise.all([fetchIdeas(), fetchCategories()]);
+    } catch (error) {
+      console.error('データ取得エラー:', error);
+    }
   }, [fetchIdeas, fetchCategories]);
+
+  useEffect(() => {
+    refreshAll();
+  }, [refreshAll]);
 
   const handleIdeaClick = (idea) => {
     setSelectedIdea(idea);
@@ -78,8 +69,7 @@ function App() {
 
         if (error) throw error;
 
-        fetchIdeas();
-        fetchCategories();
+        refreshAll();
         setSelectedIdea(null);
       } catch (error) {
         console.error('削除エラー:', error);

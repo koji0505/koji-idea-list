@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './IdeaForm.css';
+import { LEVELS, DEFAULT_LEVEL } from '../utils/ideaUtils';
 
 const IdeaForm = ({ idea, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     category: '',
     title: '',
     details: '',
-    level: '中'
+    level: DEFAULT_LEVEL
   });
 
   useEffect(() => {
@@ -76,7 +77,7 @@ const IdeaForm = ({ idea, onSubmit, onCancel }) => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="level">レベル *</label>
+              <label htmlFor="level">進捗 *</label>
               <select
                 id="level"
                 name="level"
@@ -84,9 +85,9 @@ const IdeaForm = ({ idea, onSubmit, onCancel }) => {
                 onChange={handleChange}
                 required
               >
-                <option value="高">高</option>
-                <option value="中">中</option>
-                <option value="低">低</option>
+                {LEVELS.map((level) => (
+                  <option key={level} value={level}>{level}</option>
+                ))}
               </select>
             </div>
 

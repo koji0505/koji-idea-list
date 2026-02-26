@@ -1,31 +1,8 @@
 import React from 'react';
 import './IdeaDetail.css';
+import { getLevelColor, formatDateTime } from '../utils/ideaUtils';
 
 const IdeaDetail = ({ idea, onClose, onEdit, onDelete }) => {
-  const getLevelColor = (level) => {
-    switch (level) {
-      case '高':
-        return '#e74c3c';
-      case '中':
-        return '#f39c12';
-      case '低':
-        return '#3498db';
-      default:
-        return '#95a5a6';
-    }
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('ja-JP', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -43,7 +20,7 @@ const IdeaDetail = ({ idea, onClose, onEdit, onDelete }) => {
           </div>
 
           <div className="detail-row">
-            <label>レベル:</label>
+            <label>進捗:</label>
             <span
               className="detail-level"
               style={{ backgroundColor: getLevelColor(idea.level) }}
@@ -66,7 +43,7 @@ const IdeaDetail = ({ idea, onClose, onEdit, onDelete }) => {
 
           <div className="detail-row">
             <label>登録日:</label>
-            <span>{formatDate(idea.created_at)}</span>
+            <span>{formatDateTime(idea.created_at)}</span>
           </div>
         </div>
 

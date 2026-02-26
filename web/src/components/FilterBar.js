@@ -1,8 +1,9 @@
 import React from 'react';
 import './FilterBar.css';
+import { LEVEL_OPTIONS } from '../utils/ideaUtils';
 
 const FilterBar = ({ categories, selectedCategory, selectedLevel, onCategoryChange, onLevelChange }) => {
-  const levels = ['すべて', '高', '中', '低'];
+  const levels = LEVEL_OPTIONS;
 
   return (
     <div className="filter-bar">
@@ -22,7 +23,7 @@ const FilterBar = ({ categories, selectedCategory, selectedLevel, onCategoryChan
       </div>
 
       <div className="filter-group">
-        <label htmlFor="level-select">レベル:</label>
+        <label htmlFor="level-select">進捗:</label>
         <select
           id="level-select"
           value={selectedLevel}
